@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DmsBacteriaSpeciesMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DmsBacteriaSpecies">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="genusId" jdbcType="INTEGER" property="genusid" />
+    <result column="species_name" jdbcType="VARCHAR" property="speciesName" />
+    <result column="species_name_zh" jdbcType="VARCHAR" property="speciesNameZh" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, genusId, species_name, species_name_zh
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.DmsBacteriaSpeciesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dms_bacteria_species
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dms_bacteria_species
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dms_bacteria_species
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.DmsBacteriaSpeciesExample">
+    delete from dms_bacteria_species
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.DmsBacteriaSpecies">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dms_bacteria_species (genusId, species_name, species_name_zh
+      )
+    values (#{genusid,jdbcType=INTEGER}, #{speciesName,jdbcType=VARCHAR}, #{speciesNameZh,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.DmsBacteriaSpecies">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dms_bacteria_species
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="genusid != null">
+        genusId,
+      </if>
+      <if test="speciesName != null">
+        species_name,
+      </if>
+      <if test="speciesNameZh != null">
+        species_name_zh,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="genusid != null">
+        #{genusid,jdbcType=INTEGER},
+      </if>
+      <if test="speciesName != null">
+        #{speciesName,jdbcType=VARCHAR},
+      </if>
+      <if test="speciesNameZh != null">
+        #{speciesNameZh,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.DmsBacteriaSpeciesExample" resultType="java.lang.Long">
+    select count(*) from dms_bacteria_species
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dms_bacteria_species
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.genusid != null">
+        genusId = #{record.genusid,jdbcType=INTEGER},
+      </if>
+      <if test="record.speciesName != null">
+        species_name = #{record.speciesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speciesNameZh != null">
+        species_name_zh = #{record.speciesNameZh,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dms_bacteria_species
+    set id = #{record.id,jdbcType=INTEGER},
+      genusId = #{record.genusid,jdbcType=INTEGER},
+      species_name = #{record.speciesName,jdbcType=VARCHAR},
+      species_name_zh = #{record.speciesNameZh,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.DmsBacteriaSpecies">
+    update dms_bacteria_species
+    <set>
+      <if test="genusid != null">
+        genusId = #{genusid,jdbcType=INTEGER},
+      </if>
+      <if test="speciesName != null">
+        species_name = #{speciesName,jdbcType=VARCHAR},
+      </if>
+      <if test="speciesNameZh != null">
+        species_name_zh = #{speciesNameZh,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.DmsBacteriaSpecies">
+    update dms_bacteria_species
+    set genusId = #{genusid,jdbcType=INTEGER},
+      species_name = #{speciesName,jdbcType=VARCHAR},
+      species_name_zh = #{speciesNameZh,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

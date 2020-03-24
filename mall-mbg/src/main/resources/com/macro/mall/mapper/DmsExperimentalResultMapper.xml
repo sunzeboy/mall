@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DmsExperimentalResultMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DmsExperimentalResult">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="probiotics_id" jdbcType="INTEGER" property="probioticsId" />
+    <result column="probiotics_type" jdbcType="INTEGER" property="probioticsType" />
+    <result column="content_weight" jdbcType="REAL" property="contentWeight" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="resource_id" jdbcType="INTEGER" property="resourceId" />
+    <result column="test_time" jdbcType="TIMESTAMP" property="testTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, probiotics_id, probiotics_type, content_weight, quantity, resource_id, test_time
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.DmsExperimentalResultExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dms_experimental_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dms_experimental_result
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dms_experimental_result
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.DmsExperimentalResultExample">
+    delete from dms_experimental_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.DmsExperimentalResult">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dms_experimental_result (probiotics_id, probiotics_type, content_weight, 
+      quantity, resource_id, test_time
+      )
+    values (#{probioticsId,jdbcType=INTEGER}, #{probioticsType,jdbcType=INTEGER}, #{contentWeight,jdbcType=REAL}, 
+      #{quantity,jdbcType=INTEGER}, #{resourceId,jdbcType=INTEGER}, #{testTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.DmsExperimentalResult">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dms_experimental_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="probioticsId != null">
+        probiotics_id,
+      </if>
+      <if test="probioticsType != null">
+        probiotics_type,
+      </if>
+      <if test="contentWeight != null">
+        content_weight,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="resourceId != null">
+        resource_id,
+      </if>
+      <if test="testTime != null">
+        test_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="probioticsId != null">
+        #{probioticsId,jdbcType=INTEGER},
+      </if>
+      <if test="probioticsType != null">
+        #{probioticsType,jdbcType=INTEGER},
+      </if>
+      <if test="contentWeight != null">
+        #{contentWeight,jdbcType=REAL},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="resourceId != null">
+        #{resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="testTime != null">
+        #{testTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.DmsExperimentalResultExample" resultType="java.lang.Long">
+    select count(*) from dms_experimental_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dms_experimental_result
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.probioticsId != null">
+        probiotics_id = #{record.probioticsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.probioticsType != null">
+        probiotics_type = #{record.probioticsType,jdbcType=INTEGER},
+      </if>
+      <if test="record.contentWeight != null">
+        content_weight = #{record.contentWeight,jdbcType=REAL},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceId != null">
+        resource_id = #{record.resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.testTime != null">
+        test_time = #{record.testTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dms_experimental_result
+    set id = #{record.id,jdbcType=INTEGER},
+      probiotics_id = #{record.probioticsId,jdbcType=INTEGER},
+      probiotics_type = #{record.probioticsType,jdbcType=INTEGER},
+      content_weight = #{record.contentWeight,jdbcType=REAL},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      resource_id = #{record.resourceId,jdbcType=INTEGER},
+      test_time = #{record.testTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.DmsExperimentalResult">
+    update dms_experimental_result
+    <set>
+      <if test="probioticsId != null">
+        probiotics_id = #{probioticsId,jdbcType=INTEGER},
+      </if>
+      <if test="probioticsType != null">
+        probiotics_type = #{probioticsType,jdbcType=INTEGER},
+      </if>
+      <if test="contentWeight != null">
+        content_weight = #{contentWeight,jdbcType=REAL},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="resourceId != null">
+        resource_id = #{resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="testTime != null">
+        test_time = #{testTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.DmsExperimentalResult">
+    update dms_experimental_result
+    set probiotics_id = #{probioticsId,jdbcType=INTEGER},
+      probiotics_type = #{probioticsType,jdbcType=INTEGER},
+      content_weight = #{contentWeight,jdbcType=REAL},
+      quantity = #{quantity,jdbcType=INTEGER},
+      resource_id = #{resourceId,jdbcType=INTEGER},
+      test_time = #{testTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

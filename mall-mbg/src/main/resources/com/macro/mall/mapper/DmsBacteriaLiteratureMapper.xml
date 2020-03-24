@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DmsBacteriaLiteratureMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DmsBacteriaLiterature">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="literature_type" jdbcType="INTEGER" property="literatureType" />
+    <result column="literature_name" jdbcType="VARCHAR" property="literatureName" />
+    <result column="literature_name_zh" jdbcType="VARCHAR" property="literatureNameZh" />
+    <result column="literature_path" jdbcType="VARCHAR" property="literaturePath" />
+    <result column="search_words" jdbcType="VARCHAR" property="searchWords" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, literature_type, literature_name, literature_name_zh, literature_path, search_words
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.DmsBacteriaLiteratureExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dms_bacteria_literature
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dms_bacteria_literature
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dms_bacteria_literature
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.DmsBacteriaLiteratureExample">
+    delete from dms_bacteria_literature
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.DmsBacteriaLiterature">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dms_bacteria_literature (literature_type, literature_name, literature_name_zh, 
+      literature_path, search_words)
+    values (#{literatureType,jdbcType=INTEGER}, #{literatureName,jdbcType=VARCHAR}, #{literatureNameZh,jdbcType=VARCHAR}, 
+      #{literaturePath,jdbcType=VARCHAR}, #{searchWords,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.DmsBacteriaLiterature">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dms_bacteria_literature
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="literatureType != null">
+        literature_type,
+      </if>
+      <if test="literatureName != null">
+        literature_name,
+      </if>
+      <if test="literatureNameZh != null">
+        literature_name_zh,
+      </if>
+      <if test="literaturePath != null">
+        literature_path,
+      </if>
+      <if test="searchWords != null">
+        search_words,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="literatureType != null">
+        #{literatureType,jdbcType=INTEGER},
+      </if>
+      <if test="literatureName != null">
+        #{literatureName,jdbcType=VARCHAR},
+      </if>
+      <if test="literatureNameZh != null">
+        #{literatureNameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="literaturePath != null">
+        #{literaturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="searchWords != null">
+        #{searchWords,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.DmsBacteriaLiteratureExample" resultType="java.lang.Long">
+    select count(*) from dms_bacteria_literature
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dms_bacteria_literature
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.literatureType != null">
+        literature_type = #{record.literatureType,jdbcType=INTEGER},
+      </if>
+      <if test="record.literatureName != null">
+        literature_name = #{record.literatureName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.literatureNameZh != null">
+        literature_name_zh = #{record.literatureNameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.literaturePath != null">
+        literature_path = #{record.literaturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.searchWords != null">
+        search_words = #{record.searchWords,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dms_bacteria_literature
+    set id = #{record.id,jdbcType=INTEGER},
+      literature_type = #{record.literatureType,jdbcType=INTEGER},
+      literature_name = #{record.literatureName,jdbcType=VARCHAR},
+      literature_name_zh = #{record.literatureNameZh,jdbcType=VARCHAR},
+      literature_path = #{record.literaturePath,jdbcType=VARCHAR},
+      search_words = #{record.searchWords,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.DmsBacteriaLiterature">
+    update dms_bacteria_literature
+    <set>
+      <if test="literatureType != null">
+        literature_type = #{literatureType,jdbcType=INTEGER},
+      </if>
+      <if test="literatureName != null">
+        literature_name = #{literatureName,jdbcType=VARCHAR},
+      </if>
+      <if test="literatureNameZh != null">
+        literature_name_zh = #{literatureNameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="literaturePath != null">
+        literature_path = #{literaturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="searchWords != null">
+        search_words = #{searchWords,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.DmsBacteriaLiterature">
+    update dms_bacteria_literature
+    set literature_type = #{literatureType,jdbcType=INTEGER},
+      literature_name = #{literatureName,jdbcType=VARCHAR},
+      literature_name_zh = #{literatureNameZh,jdbcType=VARCHAR},
+      literature_path = #{literaturePath,jdbcType=VARCHAR},
+      search_words = #{searchWords,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
