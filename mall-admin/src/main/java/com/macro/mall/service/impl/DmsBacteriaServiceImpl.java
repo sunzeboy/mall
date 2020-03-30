@@ -1,12 +1,15 @@
 package com.macro.mall.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.macro.mall.mapper.DmsBacteriaGenusMapper;
 import com.macro.mall.mapper.DmsBacteriaKeMapper;
 import com.macro.mall.mapper.DmsBacteriaSpeciesMapper;
+import com.macro.mall.mapper.DmsBacteriaStrainMapper;
 import com.macro.mall.model.*;
 import com.macro.mall.service.DmsBacteriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -23,6 +26,8 @@ public class DmsBacteriaServiceImpl implements DmsBacteriaService {
     private DmsBacteriaGenusMapper dmsBacteriaGenusMapper;
     @Autowired
     private DmsBacteriaSpeciesMapper dmsBacteriaSpeciesMapper;
+    @Autowired
+    private DmsBacteriaStrainMapper dmsBacteriaStrainMapper;
 
     @Override
     public int createKe(DmsBacteriaKe bacteriaKe) {
@@ -30,8 +35,15 @@ public class DmsBacteriaServiceImpl implements DmsBacteriaService {
     }
 
     @Override
-    public List<DmsBacteriaKe> listAllKe() {
-        return dmsBacteriaKeMapper.selectByExample(new DmsBacteriaKeExample());
+    public List<DmsBacteriaKe> listAllKe(String keyword, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        DmsBacteriaKeExample example = new DmsBacteriaKeExample();
+        DmsBacteriaKeExample.Criteria criteria = example.createCriteria();
+        if (!StringUtils.isEmpty(keyword)) {
+            criteria.andKeNameLike("%" + keyword + "%");
+            example.or(example.createCriteria().andKeNameZhLike("%" + keyword + "%"));
+        }
+        return dmsBacteriaKeMapper.selectByExample(example);
     }
 
     @Override
@@ -50,8 +62,15 @@ public class DmsBacteriaServiceImpl implements DmsBacteriaService {
     }
 
     @Override
-    public List<DmsBacteriaGenus> listAllGenus() {
-        return dmsBacteriaGenusMapper.selectByExample(new DmsBacteriaGenusExample());
+    public List<DmsBacteriaGenus> listAllGenus(String keyword, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        DmsBacteriaGenusExample example = new DmsBacteriaGenusExample();
+        DmsBacteriaGenusExample.Criteria criteria = example.createCriteria();
+        if (!StringUtils.isEmpty(keyword)) {
+            criteria.andGenusNameLike("%" + keyword + "%");
+            example.or(example.createCriteria().andGenusNameZhLike("%" + keyword + "%"));
+        }
+        return dmsBacteriaGenusMapper.selectByExample(example);
     }
 
     @Override
@@ -70,18 +89,53 @@ public class DmsBacteriaServiceImpl implements DmsBacteriaService {
     }
 
     @Override
-    public List<DmsBacteriaSpecies> listAllSpecies() {
-        return dmsBacteriaSpeciesMapper.selectByExample(new DmsBacteriaSpeciesExample());
+    public List<DmsBacteriaSpecies> listAllSpecies(String keyword, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        DmsBacteriaSpeciesExample example = new DmsBacteriaSpeciesExample();
+        DmsBacteriaSpeciesExample.Criteria criteria = example.createCriteria();
+        if (!StringUtils.isEmpty(keyword)) {
+            criteria.andSpeciesNameLike("%" + keyword + "%");
+            example.or(example.createCriteria().andSpeciesNameZhLike("%" + keyword + "%"));
+        }
+        return dmsBacteriaSpeciesMapper.selectByExample(example);
     }
 
     @Override
     public int updateSpecies(DmsBacteriaSpecies bacteriaSpecies) {
-        return dmsBacteriaGenusMapper.updateByPrimaryKey(bacteriaSpecies);
+        return dmsBacteriaSpeciesMapper.updateByPrimaryKey(bacteriaSpecies);
     }
 
     @Override
     public int deleteSpeciesById(int bacteriaSpeciesId) {
-        return dmsBacteriaGenusMapper.deleteByPrimaryKey(bacteriaSpeciesId);
+        return dmsBacteriaSpeciesMapper.deleteByPrimaryKey(bacteriaSpeciesId);
+    }
+
+    @Override
+    public int createStrain(DmsBacteriaStrain bacteriaStrain) {
+        return dmsBacteriaStrainMapper.insert(bacteriaStrain);
+    }
+
+    @Override
+    public List<DmsBacteriaStrain> listAllStrain(String keyword, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        DmsBacteriaStrainExample example = new DmsBacteriaStrainExample();
+        DmsBacteriaStrainExample.Criteria criteria = example.createCriteria();
+        if (!StringUtils.isEmpty(keyword)) {
+            criteria.andStrainInternationalNoLike("%" + keyword + "%");
+            example.or(example.createCriteria().andStrainInsideNoLike("%" + keyword + "%"));
+        }
+        return dmsBacteriaStrainMapper.selectByExample(example);
+    }
+
+
+    @Override
+    public int updateStrain(DmsBacteriaStrain bacteriaStrain) {
+        return dmsBacteriaStrainMapper.updateByPrimaryKey(bacteriaStrain);
+    }
+
+    @Override
+    public int deleteStrainById(int bacteriaStrainId) {
+        return dmsBacteriaStrainMapper.deleteByPrimaryKey(bacteriaStrainId);
     }
 
 

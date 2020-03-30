@@ -164,63 +164,63 @@ public class DmsBacteriaSpeciesExample {
             return (Criteria) this;
         }
 
-        public Criteria andGenusidIsNull() {
-            addCriterion("genusId is null");
+        public Criteria andGenusIdIsNull() {
+            addCriterion("genus_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andGenusidIsNotNull() {
-            addCriterion("genusId is not null");
+        public Criteria andGenusIdIsNotNull() {
+            addCriterion("genus_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGenusidEqualTo(Integer value) {
-            addCriterion("genusId =", value, "genusid");
+        public Criteria andGenusIdEqualTo(Integer value) {
+            addCriterion("genus_id =", value, "genusId");
             return (Criteria) this;
         }
 
-        public Criteria andGenusidNotEqualTo(Integer value) {
-            addCriterion("genusId <>", value, "genusid");
+        public Criteria andGenusIdNotEqualTo(Integer value) {
+            addCriterion("genus_id <>", value, "genusId");
             return (Criteria) this;
         }
 
-        public Criteria andGenusidGreaterThan(Integer value) {
-            addCriterion("genusId >", value, "genusid");
+        public Criteria andGenusIdGreaterThan(Integer value) {
+            addCriterion("genus_id >", value, "genusId");
             return (Criteria) this;
         }
 
-        public Criteria andGenusidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("genusId >=", value, "genusid");
+        public Criteria andGenusIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("genus_id >=", value, "genusId");
             return (Criteria) this;
         }
 
-        public Criteria andGenusidLessThan(Integer value) {
-            addCriterion("genusId <", value, "genusid");
+        public Criteria andGenusIdLessThan(Integer value) {
+            addCriterion("genus_id <", value, "genusId");
             return (Criteria) this;
         }
 
-        public Criteria andGenusidLessThanOrEqualTo(Integer value) {
-            addCriterion("genusId <=", value, "genusid");
+        public Criteria andGenusIdLessThanOrEqualTo(Integer value) {
+            addCriterion("genus_id <=", value, "genusId");
             return (Criteria) this;
         }
 
-        public Criteria andGenusidIn(List<Integer> values) {
-            addCriterion("genusId in", values, "genusid");
+        public Criteria andGenusIdIn(List<Integer> values) {
+            addCriterion("genus_id in", values, "genusId");
             return (Criteria) this;
         }
 
-        public Criteria andGenusidNotIn(List<Integer> values) {
-            addCriterion("genusId not in", values, "genusid");
+        public Criteria andGenusIdNotIn(List<Integer> values) {
+            addCriterion("genus_id not in", values, "genusId");
             return (Criteria) this;
         }
 
-        public Criteria andGenusidBetween(Integer value1, Integer value2) {
-            addCriterion("genusId between", value1, value2, "genusid");
+        public Criteria andGenusIdBetween(Integer value1, Integer value2) {
+            addCriterion("genus_id between", value1, value2, "genusId");
             return (Criteria) this;
         }
 
-        public Criteria andGenusidNotBetween(Integer value1, Integer value2) {
-            addCriterion("genusId not between", value1, value2, "genusid");
+        public Criteria andGenusIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("genus_id not between", value1, value2, "genusId");
             return (Criteria) this;
         }
 

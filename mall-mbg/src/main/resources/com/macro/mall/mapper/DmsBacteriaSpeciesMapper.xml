@@ -3,7 +3,7 @@
 <mapper namespace="com.macro.mall.mapper.DmsBacteriaSpeciesMapper">
   <resultMap id="BaseResultMap" type="com.macro.mall.model.DmsBacteriaSpecies">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="genusId" jdbcType="INTEGER" property="genusid" />
+    <result column="genus_id" jdbcType="INTEGER" property="genusId" />
     <result column="species_name" jdbcType="VARCHAR" property="speciesName" />
     <result column="species_name_zh" jdbcType="VARCHAR" property="speciesNameZh" />
   </resultMap>
@@ -66,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, genusId, species_name, species_name_zh
+    id, genus_id, species_name, species_name_zh
   </sql>
   <select id="selectByExample" parameterType="com.macro.mall.model.DmsBacteriaSpeciesExample" resultMap="BaseResultMap">
     select
@@ -102,9 +102,9 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into dms_bacteria_species (genusId, species_name, species_name_zh
+    insert into dms_bacteria_species (genus_id, species_name, species_name_zh
       )
-    values (#{genusid,jdbcType=INTEGER}, #{speciesName,jdbcType=VARCHAR}, #{speciesNameZh,jdbcType=VARCHAR}
+    values (#{genusId,jdbcType=INTEGER}, #{speciesName,jdbcType=VARCHAR}, #{speciesNameZh,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.macro.mall.model.DmsBacteriaSpecies">
@@ -113,8 +113,8 @@
     </selectKey>
     insert into dms_bacteria_species
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="genusid != null">
-        genusId,
+      <if test="genusId != null">
+        genus_id,
       </if>
       <if test="speciesName != null">
         species_name,
@@ -124,8 +124,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="genusid != null">
-        #{genusid,jdbcType=INTEGER},
+      <if test="genusId != null">
+        #{genusId,jdbcType=INTEGER},
       </if>
       <if test="speciesName != null">
         #{speciesName,jdbcType=VARCHAR},
@@ -147,8 +147,8 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.genusid != null">
-        genusId = #{record.genusid,jdbcType=INTEGER},
+      <if test="record.genusId != null">
+        genus_id = #{record.genusId,jdbcType=INTEGER},
       </if>
       <if test="record.speciesName != null">
         species_name = #{record.speciesName,jdbcType=VARCHAR},
@@ -164,7 +164,7 @@
   <update id="updateByExample" parameterType="map">
     update dms_bacteria_species
     set id = #{record.id,jdbcType=INTEGER},
-      genusId = #{record.genusid,jdbcType=INTEGER},
+      genus_id = #{record.genusId,jdbcType=INTEGER},
       species_name = #{record.speciesName,jdbcType=VARCHAR},
       species_name_zh = #{record.speciesNameZh,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -174,8 +174,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.DmsBacteriaSpecies">
     update dms_bacteria_species
     <set>
-      <if test="genusid != null">
-        genusId = #{genusid,jdbcType=INTEGER},
+      <if test="genusId != null">
+        genus_id = #{genusId,jdbcType=INTEGER},
       </if>
       <if test="speciesName != null">
         species_name = #{speciesName,jdbcType=VARCHAR},
@@ -188,7 +188,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.DmsBacteriaSpecies">
     update dms_bacteria_species
-    set genusId = #{genusid,jdbcType=INTEGER},
+    set genus_id = #{genusId,jdbcType=INTEGER},
       species_name = #{speciesName,jdbcType=VARCHAR},
       species_name_zh = #{speciesNameZh,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

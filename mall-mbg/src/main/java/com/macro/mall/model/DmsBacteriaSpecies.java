@@ -8,7 +8,7 @@ public class DmsBacteriaSpecies implements Serializable {
     private Integer id;
 
     @ApiModelProperty(value = "属ID")
-    private Integer genusid;
+    private Integer genusId;
 
     @ApiModelProperty(value = "种名称")
     private String speciesName;
@@ -26,12 +26,12 @@ public class DmsBacteriaSpecies implements Serializable {
         this.id = id;
     }
 
-    public Integer getGenusid() {
-        return genusid;
+    public Integer getGenusId() {
+        return genusId;
     }
 
-    public void setGenusid(Integer genusid) {
-        this.genusid = genusid;
+    public void setGenusId(Integer genusId) {
+        this.genusId = genusId;
     }
 
     public String getSpeciesName() {
@@ -57,7 +57,7 @@ public class DmsBacteriaSpecies implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", genusid=").append(genusid);
+        sb.append(", genusId=").append(genusId);
         sb.append(", speciesName=").append(speciesName);
         sb.append(", speciesNameZh=").append(speciesNameZh);
         sb.append(", serialVersionUID=").append(serialVersionUID);
