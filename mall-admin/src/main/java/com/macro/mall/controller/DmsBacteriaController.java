@@ -3,6 +3,7 @@ package com.macro.mall.controller;
 import com.macro.mall.common.api.CommonPage;
 import com.macro.mall.common.api.CommonResult;
 import com.macro.mall.model.*;
+import com.macro.mall.service.DmsBacteriaProductsService;
 import com.macro.mall.service.DmsBacteriaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,6 +20,9 @@ public class DmsBacteriaController {
 
     @Autowired
     private DmsBacteriaService dmsBacteriaService;
+
+    @Autowired
+    private DmsBacteriaProductsService dmsBacteriaProductsService;
 
     @ApiOperation("添加科")
     @RequestMapping(value = "/ke/create", method = RequestMethod.POST)
@@ -54,9 +58,9 @@ public class DmsBacteriaController {
     }
 
     @ApiOperation("删除科")
-    @RequestMapping(value = "/ke/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/ke/delete/{dmsBacteriaKeId}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult deleteKe(@RequestBody int dmsBacteriaKeId) {
+    public CommonResult deleteKe(@PathVariable("dmsBacteriaKeId") int dmsBacteriaKeId) {
         int count = dmsBacteriaService.deleteKeById(dmsBacteriaKeId);
         if (count > 0) {
             return CommonResult.success(count);
@@ -98,9 +102,9 @@ public class DmsBacteriaController {
     }
 
     @ApiOperation("删除属")
-    @RequestMapping(value = "/genus/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/genus/delete/{dmsBacteriaGenusId}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult deleteGenus(@RequestBody int dmsBacteriaGenusId) {
+    public CommonResult deleteGenus(@PathVariable("dmsBacteriaGenusId") int dmsBacteriaGenusId) {
         int count = dmsBacteriaService.deleteGenusById(dmsBacteriaGenusId);
         if (count > 0) {
             return CommonResult.success(count);
@@ -143,10 +147,10 @@ public class DmsBacteriaController {
     }
 
     @ApiOperation("删除种")
-    @RequestMapping(value = "/species/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/species/delete/{dmsBacteriaSpeciesId}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult deleteSpecies(@RequestBody int dmsBacteriaSpeciesId) {
-        int count = dmsBacteriaService.deleteGenusById(dmsBacteriaSpeciesId);
+    public CommonResult deleteSpecies(@PathVariable("dmsBacteriaSpeciesId") int dmsBacteriaSpeciesId) {
+        int count = dmsBacteriaService.deleteSpeciesById(dmsBacteriaSpeciesId);
         if (count > 0) {
             return CommonResult.success(count);
         }
@@ -187,9 +191,9 @@ public class DmsBacteriaController {
     }
 
     @ApiOperation("删除株")
-    @RequestMapping(value = "/strain/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/strain/delete/{dmsBacteriaStrainId}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult deleteStrain(@RequestBody int dmsBacteriaStrainId) {
+    public CommonResult deleteStrain(@PathVariable("dmsBacteriaStrainId") int dmsBacteriaStrainId) {
         int count = dmsBacteriaService.deleteStrainById(dmsBacteriaStrainId);
         if (count > 0) {
             return CommonResult.success(count);
@@ -197,4 +201,53 @@ public class DmsBacteriaController {
         return CommonResult.failed();
     }
 
+
+
+
+    @ApiOperation("添加代谢产物")
+    @RequestMapping(value = "/products/create", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult createProducts(@RequestBody DmsBacteriaProducts dmsBacteriaProducts) {
+        int count = dmsBacteriaProductsService.createProducts(dmsBacteriaProducts);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("获取代谢产物")
+    @RequestMapping(value = "/products/listAll", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CommonPage<DmsBacteriaProducts>> listAllProducts(@RequestParam(value = "keyword", required = false) String keyword,
+                                                                     @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                                                     @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        List<DmsBacteriaProducts> dmsBacteriaProductsList = dmsBacteriaProductsService.listAllProducts(keyword, pageSize, pageNum);
+        return CommonResult.success(CommonPage.restPage(dmsBacteriaProductsList));
+    }
+
+    @ApiOperation("编辑代谢产物")
+    @RequestMapping(value = "/products/update", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateProduct(@RequestBody DmsBacteriaProducts dmsBacteriaProducts) {
+        int count = dmsBacteriaProductsService.updateProduct(dmsBacteriaProducts);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("删除代谢产物")
+    @RequestMapping(value = "/products/delete/{dmsBacteriaStrainId}", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult deleteProduct(@PathVariable("dmsBacteriaStrainId") int dmsBacteriaStrainId) {
+        int count = dmsBacteriaProductsService.deleteProductById(dmsBacteriaStrainId);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+
+
+    
 }
