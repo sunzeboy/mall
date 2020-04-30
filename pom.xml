@@ -51,7 +51,7 @@
         <mall-security.version>1.0-SNAPSHOT</mall-security.version>
     </properties>
 
-    <dependencies>
+    <dependencies>mybatis-plus
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

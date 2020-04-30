@@ -1,11 +1,12 @@
 package com.macro.mall.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.macro.mall.dao.DmsProductsRelationsDao;
+import com.macro.mall.dto.DmsProductsRelationsItem;
 import com.macro.mall.mapper.DmsBacteriaProductsMapper;
+import com.macro.mall.mapper.DmsBacteriaRelationsStrainProductsMapper;
 import com.macro.mall.mapper.DmsBacteriaStrainMapper;
-import com.macro.mall.model.DmsBacteriaKeExample;
-import com.macro.mall.model.DmsBacteriaProducts;
-import com.macro.mall.model.DmsBacteriaProductsExample;
+import com.macro.mall.model.*;
 import com.macro.mall.service.DmsBacteriaProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,10 @@ public class DmsBacteriaProductsServiceImpl implements DmsBacteriaProductsServic
 
     @Autowired
     private DmsBacteriaProductsMapper dmsBacteriaProductsMapper;
+    @Autowired
+    private DmsProductsRelationsDao dmsProductsRelationsDao;
+    @Autowired
+    private DmsBacteriaRelationsStrainProductsMapper dmsBacteriaRelationsStrainProductsMapper;
 
     @Override
     public int createProducts(DmsBacteriaProducts bacteriaProducts) {
@@ -50,4 +55,31 @@ public class DmsBacteriaProductsServiceImpl implements DmsBacteriaProductsServic
     public int deleteProductById(int bacteriaProductsId) {
         return dmsBacteriaProductsMapper.deleteByPrimaryKey(bacteriaProductsId);
     }
+
+    @Override
+    public int createRelationsStrainAndProducts(DmsBacteriaRelationsStrainProducts dmsBacteriaRelationsStrainProducts) {
+        return dmsBacteriaRelationsStrainProductsMapper.insert(dmsBacteriaRelationsStrainProducts);
+    }
+
+    @Override
+    public List<DmsProductsRelationsItem> listAllRelationsStrainAndProducts(String keyword, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        if (!StringUtils.isEmpty(keyword)) {
+           return dmsProductsRelationsDao.findAllByKeyword(keyword);
+        }
+        return dmsProductsRelationsDao.findAll();
+    }
+
+    @Override
+    public int updateRelationsStrainAndProducts(DmsBacteriaRelationsStrainProducts dmsBacteriaRelationsStrainProducts) {
+        DmsBacteriaRelationsStrainProductsExample example = new DmsBacteriaRelationsStrainProductsExample();
+        return dmsBacteriaRelationsStrainProductsMapper.updateByExample(dmsBacteriaRelationsStrainProducts,example);
+    }
+
+    @Override
+    public int deleteRelationsStrainAndProducts(DmsBacteriaRelationsStrainProducts dmsBacteriaRelationsStrainProducts) {
+        return dmsBacteriaRelationsStrainProductsMapper.deleteByPrimaryKey(dmsBacteriaRelationsStrainProducts.getStrainId(),dmsBacteriaRelationsStrainProducts.getProductsId());
+    }
+
+
 }

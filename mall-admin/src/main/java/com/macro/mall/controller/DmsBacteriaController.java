@@ -2,6 +2,7 @@ package com.macro.mall.controller;
 
 import com.macro.mall.common.api.CommonPage;
 import com.macro.mall.common.api.CommonResult;
+import com.macro.mall.dto.DmsProductsRelationsItem;
 import com.macro.mall.model.*;
 import com.macro.mall.service.DmsBacteriaProductsService;
 import com.macro.mall.service.DmsBacteriaService;
@@ -248,6 +249,46 @@ public class DmsBacteriaController {
     }
 
 
+    @ApiOperation("获取代谢产物与菌类的关系")
+    @RequestMapping(value = "/productsRelations/findAll", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CommonPage<DmsProductsRelationsItem>> findAllProductsRelations(@RequestParam(value = "keyword", required = false) String keyword,
+                                      @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                      @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+        List<DmsProductsRelationsItem> relations = dmsBacteriaProductsService.listAllRelationsStrainAndProducts(keyword, pageSize, pageNum);
+        return CommonResult.success(CommonPage.restPage(relations));
+    }
 
-    
+    @ApiOperation("添加代谢产物与菌类的关系")
+    @RequestMapping(value = "/productsRelations/create", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult createRelationsStrainAndProducts(@RequestBody DmsBacteriaRelationsStrainProducts dmsBacteriaRelationsStrainProducts) {
+        int count = dmsBacteriaProductsService.createRelationsStrainAndProducts(dmsBacteriaRelationsStrainProducts);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("更新代谢产物与菌类的关系")
+    @RequestMapping(value = "/productsRelations/update", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateRelationsStrainAndProducts(@RequestBody DmsBacteriaRelationsStrainProducts dmsBacteriaRelationsStrainProducts) {
+        int count = dmsBacteriaProductsService.updateRelationsStrainAndProducts(dmsBacteriaRelationsStrainProducts);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("删除代谢产物与菌类的关系")
+    @RequestMapping(value = "/productsRelations/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult deleteRelationsStrainAndProducts(@RequestBody DmsBacteriaRelationsStrainProducts dmsBacteriaRelationsStrainProducts) {
+        int count = dmsBacteriaProductsService.deleteRelationsStrainAndProducts(dmsBacteriaRelationsStrainProducts);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
 }
