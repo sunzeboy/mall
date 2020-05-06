@@ -3,14 +3,14 @@ package com.macro.mall.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DmsBacteriaRelationsStrainProductsExample {
+public class DmsBacteriaRelationsProductsExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public DmsBacteriaRelationsStrainProductsExample() {
+    public DmsBacteriaRelationsProductsExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,66 +104,6 @@ public class DmsBacteriaRelationsStrainProductsExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andBacteriaIdIsNull() {
-            addCriterion("bacteria_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBacteriaIdIsNotNull() {
-            addCriterion("bacteria_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBacteriaIdEqualTo(Integer value) {
-            addCriterion("bacteria_id =", value, "bacteriaId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBacteriaIdNotEqualTo(Integer value) {
-            addCriterion("bacteria_id <>", value, "bacteriaId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBacteriaIdGreaterThan(Integer value) {
-            addCriterion("bacteria_id >", value, "bacteriaId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBacteriaIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("bacteria_id >=", value, "bacteriaId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBacteriaIdLessThan(Integer value) {
-            addCriterion("bacteria_id <", value, "bacteriaId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBacteriaIdLessThanOrEqualTo(Integer value) {
-            addCriterion("bacteria_id <=", value, "bacteriaId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBacteriaIdIn(List<Integer> values) {
-            addCriterion("bacteria_id in", values, "bacteriaId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBacteriaIdNotIn(List<Integer> values) {
-            addCriterion("bacteria_id not in", values, "bacteriaId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBacteriaIdBetween(Integer value1, Integer value2) {
-            addCriterion("bacteria_id between", value1, value2, "bacteriaId");
-            return (Criteria) this;
-        }
-
-        public Criteria andBacteriaIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("bacteria_id not between", value1, value2, "bacteriaId");
-            return (Criteria) this;
-        }
-
         public Criteria andProductsIdIsNull() {
             addCriterion("products_id is null");
             return (Criteria) this;
@@ -221,6 +161,66 @@ public class DmsBacteriaRelationsStrainProductsExample {
 
         public Criteria andProductsIdNotBetween(Integer value1, Integer value2) {
             addCriterion("products_id not between", value1, value2, "productsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacteriaIdIsNull() {
+            addCriterion("bacteria_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacteriaIdIsNotNull() {
+            addCriterion("bacteria_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacteriaIdEqualTo(Integer value) {
+            addCriterion("bacteria_id =", value, "bacteriaId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacteriaIdNotEqualTo(Integer value) {
+            addCriterion("bacteria_id <>", value, "bacteriaId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacteriaIdGreaterThan(Integer value) {
+            addCriterion("bacteria_id >", value, "bacteriaId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacteriaIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("bacteria_id >=", value, "bacteriaId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacteriaIdLessThan(Integer value) {
+            addCriterion("bacteria_id <", value, "bacteriaId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacteriaIdLessThanOrEqualTo(Integer value) {
+            addCriterion("bacteria_id <=", value, "bacteriaId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacteriaIdIn(List<Integer> values) {
+            addCriterion("bacteria_id in", values, "bacteriaId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacteriaIdNotIn(List<Integer> values) {
+            addCriterion("bacteria_id not in", values, "bacteriaId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacteriaIdBetween(Integer value1, Integer value2) {
+            addCriterion("bacteria_id between", value1, value2, "bacteriaId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBacteriaIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("bacteria_id not between", value1, value2, "bacteriaId");
             return (Criteria) this;
         }
     }

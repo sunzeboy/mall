@@ -1,9 +1,6 @@
 package com.macro.mall.service;
 
-import com.macro.mall.model.DmsBacteriaGenus;
-import com.macro.mall.model.DmsBacteriaKe;
-import com.macro.mall.model.DmsBacteriaSpecies;
-import com.macro.mall.model.DmsBacteriaStrain;
+import com.macro.mall.model.*;
 
 import java.util.List;
 
@@ -30,4 +27,9 @@ public interface DmsBacteriaService {
     List<DmsBacteriaStrain> listAllStrain(String keyword, Integer pageSize, Integer pageNum);
     int updateStrain(DmsBacteriaStrain bacteriaStrain);
     int deleteStrainById(int bacteriaStrainId);
+
+    int createBacteria(DmsBacteriaInfo bacteriaInfo);
+    List<DmsBacteriaInfo> listAllBacterias(String keyword, Integer pageSize, Integer pageNum, Integer bacteriaType);
+    int updateBacteria(DmsBacteriaInfo bacteriaInfo);
+    int deleteBacteriaById(int bacteriaInfoId);
 }

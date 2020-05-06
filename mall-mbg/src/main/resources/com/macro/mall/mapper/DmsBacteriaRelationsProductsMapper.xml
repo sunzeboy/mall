@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.DmsBacteriaRelationsStrainProductsMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.DmsBacteriaRelationsStrainProducts">
-    <id column="bacteria_id" jdbcType="INTEGER" property="bacteriaId" />
+<mapper namespace="com.macro.mall.mapper.DmsBacteriaRelationsProductsMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DmsBacteriaRelationsProducts">
     <id column="products_id" jdbcType="INTEGER" property="productsId" />
+    <id column="bacteria_id" jdbcType="INTEGER" property="bacteriaId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,15 +64,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    bacteria_id, products_id
+    products_id, bacteria_id
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.DmsBacteriaRelationsStrainProductsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.macro.mall.model.DmsBacteriaRelationsProductsExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from dms_bacteria_relations_strain_products
+    from dms_bacteria_relations_products
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -81,53 +81,53 @@
     </if>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
-    delete from dms_bacteria_relations_strain_products
-    where bacteria_id = #{bacteriaId,jdbcType=INTEGER}
-      and products_id = #{productsId,jdbcType=INTEGER}
+    delete from dms_bacteria_relations_products
+    where products_id = #{productsId,jdbcType=INTEGER}
+      and bacteria_id = #{bacteriaId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.DmsBacteriaRelationsStrainProductsExample">
-    delete from dms_bacteria_relations_strain_products
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.DmsBacteriaRelationsProductsExample">
+    delete from dms_bacteria_relations_products
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.DmsBacteriaRelationsStrainProducts">
-    insert into dms_bacteria_relations_strain_products (bacteria_id, products_id)
-    values (#{bacteriaId,jdbcType=INTEGER}, #{productsId,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.macro.mall.model.DmsBacteriaRelationsProducts">
+    insert into dms_bacteria_relations_products (products_id, bacteria_id)
+    values (#{productsId,jdbcType=INTEGER}, #{bacteriaId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.DmsBacteriaRelationsStrainProducts">
-    insert into dms_bacteria_relations_strain_products
+  <insert id="insertSelective" parameterType="com.macro.mall.model.DmsBacteriaRelationsProducts">
+    insert into dms_bacteria_relations_products
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="bacteriaId != null">
-        bacteria_id,
-      </if>
       <if test="productsId != null">
         products_id,
       </if>
+      <if test="bacteriaId != null">
+        bacteria_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="bacteriaId != null">
-        #{bacteriaId,jdbcType=INTEGER},
-      </if>
       <if test="productsId != null">
         #{productsId,jdbcType=INTEGER},
       </if>
+      <if test="bacteriaId != null">
+        #{bacteriaId,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.DmsBacteriaRelationsStrainProductsExample" resultType="java.lang.Long">
-    select count(*) from dms_bacteria_relations_strain_products
+  <select id="countByExample" parameterType="com.macro.mall.model.DmsBacteriaRelationsProductsExample" resultType="java.lang.Long">
+    select count(*) from dms_bacteria_relations_products
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update dms_bacteria_relations_strain_products
+    update dms_bacteria_relations_products
     <set>
-      <if test="record.bacteriaId != null">
-        bacteria_id = #{record.bacteriaId,jdbcType=INTEGER},
-      </if>
       <if test="record.productsId != null">
         products_id = #{record.productsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bacteriaId != null">
+        bacteria_id = #{record.bacteriaId,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -135,9 +135,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update dms_bacteria_relations_strain_products
-    set bacteria_id = #{record.bacteriaId,jdbcType=INTEGER},
-      products_id = #{record.productsId,jdbcType=INTEGER}
+    update dms_bacteria_relations_products
+    set products_id = #{record.productsId,jdbcType=INTEGER},
+      bacteria_id = #{record.bacteriaId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

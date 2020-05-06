@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.macro.mall.dao.DmsProductsRelationsDao;
 import com.macro.mall.dto.DmsProductsRelationsItem;
 import com.macro.mall.mapper.DmsBacteriaProductsMapper;
+import com.macro.mall.mapper.DmsBacteriaRelationsProductsMapper;
 import com.macro.mall.mapper.DmsBacteriaRelationsStrainProductsMapper;
 import com.macro.mall.mapper.DmsBacteriaStrainMapper;
 import com.macro.mall.model.*;
@@ -28,6 +29,9 @@ public class DmsBacteriaProductsServiceImpl implements DmsBacteriaProductsServic
     private DmsProductsRelationsDao dmsProductsRelationsDao;
     @Autowired
     private DmsBacteriaRelationsStrainProductsMapper dmsBacteriaRelationsStrainProductsMapper;
+    @Autowired
+    private DmsBacteriaRelationsProductsMapper dmsBacteriaRelationsProductsMapper;
+
 
     @Override
     public int createProducts(DmsBacteriaProducts bacteriaProducts) {
@@ -57,8 +61,8 @@ public class DmsBacteriaProductsServiceImpl implements DmsBacteriaProductsServic
     }
 
     @Override
-    public int createRelationsStrainAndProducts(DmsBacteriaRelationsStrainProducts dmsBacteriaRelationsStrainProducts) {
-        return dmsBacteriaRelationsStrainProductsMapper.insert(dmsBacteriaRelationsStrainProducts);
+    public int createRelationsStrainAndProducts(DmsBacteriaRelationsProducts dmsBacteriaRelationsProducts) {
+        return dmsBacteriaRelationsProductsMapper.insert(dmsBacteriaRelationsProducts);
     }
 
     @Override
@@ -71,14 +75,14 @@ public class DmsBacteriaProductsServiceImpl implements DmsBacteriaProductsServic
     }
 
     @Override
-    public int updateRelationsStrainAndProducts(DmsBacteriaRelationsStrainProducts dmsBacteriaRelationsStrainProducts) {
-        DmsBacteriaRelationsStrainProductsExample example = new DmsBacteriaRelationsStrainProductsExample();
-        return dmsBacteriaRelationsStrainProductsMapper.updateByExample(dmsBacteriaRelationsStrainProducts,example);
+    public int updateRelationsStrainAndProducts(DmsBacteriaRelationsProducts dmsBacteriaRelationsProducts) {
+        DmsBacteriaRelationsProductsExample example = new DmsBacteriaRelationsProductsExample();
+        return dmsBacteriaRelationsProductsMapper.updateByExample(dmsBacteriaRelationsProducts,example);
     }
 
     @Override
-    public int deleteRelationsStrainAndProducts(DmsBacteriaRelationsStrainProducts dmsBacteriaRelationsStrainProducts) {
-        return dmsBacteriaRelationsStrainProductsMapper.deleteByPrimaryKey(dmsBacteriaRelationsStrainProducts.getStrainId(),dmsBacteriaRelationsStrainProducts.getProductsId());
+    public int deleteRelationsStrainAndProducts(DmsBacteriaRelationsProducts dmsBacteriaRelationsProducts) {
+        return dmsBacteriaRelationsProductsMapper.deleteByPrimaryKey(dmsBacteriaRelationsProducts.getBacteriaId(),dmsBacteriaRelationsProducts.getProductsId());
     }
 
 

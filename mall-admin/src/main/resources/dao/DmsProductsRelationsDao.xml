@@ -3,33 +3,33 @@
 <mapper namespace="com.macro.mall.dao.DmsProductsRelationsDao">
     <select id="findAll" resultType="com.macro.mall.dto.DmsProductsRelationsItem">
         SELECT
-	s.id AS strain_id,
-	p.id AS products_id,
-	s.strain_international_no AS strain_international_no,
-	p.products_name_zh AS products_name_zh
+	i.id AS bacteriaId,
+	p.id AS productsId,
+	i.bacteria_name_zh AS bacteriaNameZh,
+	p.products_name_zh AS productsNameZh
 FROM
-	dms_bacteria_strain s,
+	dms_bacteria_info i,
 	dms_bacteria_products p,
-	dms_bacteria_relations_strain_products r
+	dms_bacteria_relations_products r
 WHERE
-	s.id = r.strain_id
+	i.id = r.bacteria_id
 	AND p.id = r.products_id
     </select>
 
     <select id="findAllByKeyword" resultType="com.macro.mall.dto.DmsProductsRelationsItem">
         SELECT
-	s.id AS strain_id,
-	p.id AS products_id,
-	s.strain_international_no AS strain_international_no,
-	p.products_name_zh AS products_name_zh
+	i.id AS bacteriaId,
+	p.id AS productsId,
+	i.bacteria_name_zh AS bacteriaNameZh,
+	p.products_name_zh AS productsNameZh
 FROM
-	dms_bacteria_strain s,
+	dms_bacteria_info i,
 	dms_bacteria_products p,
-	dms_bacteria_relations_strain_products r
+	dms_bacteria_relations_products r
 WHERE
-	s.id = r.strain_id
+	i.id = r.bacteria_id
 	AND p.id = r.products_id
 	AND (p.products_name_zh LIKE concat("%",#{keyword},"%")
-	OR s.strain_international_no LIKE concat("%",#{keyword},"%"))
+	OR i.bacteria_name_zh LIKE concat("%",#{keyword},"%"))
     </select>
 </mapper>

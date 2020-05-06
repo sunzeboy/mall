@@ -1,10 +1,7 @@
 package com.macro.mall.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.macro.mall.mapper.DmsBacteriaGenusMapper;
-import com.macro.mall.mapper.DmsBacteriaKeMapper;
-import com.macro.mall.mapper.DmsBacteriaSpeciesMapper;
-import com.macro.mall.mapper.DmsBacteriaStrainMapper;
+import com.macro.mall.mapper.*;
 import com.macro.mall.model.*;
 import com.macro.mall.service.DmsBacteriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +25,9 @@ public class DmsBacteriaServiceImpl implements DmsBacteriaService {
     private DmsBacteriaSpeciesMapper dmsBacteriaSpeciesMapper;
     @Autowired
     private DmsBacteriaStrainMapper dmsBacteriaStrainMapper;
+
+    @Autowired
+    private DmsBacteriaInfoMapper dmsBacteriaInfoMapper;
 
     @Override
     public int createKe(DmsBacteriaKe bacteriaKe) {
@@ -136,6 +136,36 @@ public class DmsBacteriaServiceImpl implements DmsBacteriaService {
     @Override
     public int deleteStrainById(int bacteriaStrainId) {
         return dmsBacteriaStrainMapper.deleteByPrimaryKey(bacteriaStrainId);
+    }
+
+    @Override
+    public int createBacteria(DmsBacteriaInfo bacteriaInfo) {
+        return dmsBacteriaInfoMapper.insert(bacteriaInfo);
+    }
+
+    @Override
+    public List<DmsBacteriaInfo> listAllBacterias(String keyword, Integer pageSize, Integer pageNum, Integer bacteriaType) {
+        PageHelper.startPage(pageNum, pageSize);
+        DmsBacteriaInfoExample example = new DmsBacteriaInfoExample();
+        DmsBacteriaInfoExample.Criteria criteria = example.createCriteria();
+        if (bacteriaType != null){
+            criteria.andBacteriaTypeEqualTo(bacteriaType);
+        }
+        if (!StringUtils.isEmpty(keyword)) {
+            criteria.andBacteriaNameZhLike("%" + keyword + "%");
+            example.or(example.createCriteria().andBacteriaNameLike("%" + keyword + "%"));
+        }
+        return dmsBacteriaInfoMapper.selectByExample(example);
+    }
+
+    @Override
+    public int updateBacteria(DmsBacteriaInfo bacteriaInfo) {
+        return dmsBacteriaInfoMapper.updateByPrimaryKey(bacteriaInfo);
+    }
+
+    @Override
+    public int deleteBacteriaById(int bacteriaInfoId) {
+        return dmsBacteriaInfoMapper.deleteByPrimaryKey(bacteriaInfoId);
     }
 
 

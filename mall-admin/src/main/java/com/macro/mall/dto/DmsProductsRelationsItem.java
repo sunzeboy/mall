@@ -12,10 +12,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DmsProductsRelationsItem {
-    private int strain_id;
-    private int products_id;
-    @ApiModelProperty("公司内部菌株编号")
-    private String strain_international_no;
-    @ApiModelProperty("代谢产物名称中文")
-    private String products_name_zh;
+    private int bacteriaId;
+    private int productsId;
+    private String bacteriaNameZh;
+    private String productsNameZh;
 }

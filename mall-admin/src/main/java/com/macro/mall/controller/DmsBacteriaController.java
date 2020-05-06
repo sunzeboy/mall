@@ -262,8 +262,8 @@ public class DmsBacteriaController {
     @ApiOperation("添加代谢产物与菌类的关系")
     @RequestMapping(value = "/productsRelations/create", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult createRelationsStrainAndProducts(@RequestBody DmsBacteriaRelationsStrainProducts dmsBacteriaRelationsStrainProducts) {
-        int count = dmsBacteriaProductsService.createRelationsStrainAndProducts(dmsBacteriaRelationsStrainProducts);
+    public CommonResult createRelationsStrainAndProducts(@RequestBody DmsBacteriaRelationsProducts dmsBacteriaRelationsProducts) {
+        int count = dmsBacteriaProductsService.createRelationsStrainAndProducts(dmsBacteriaRelationsProducts);
         if (count > 0) {
             return CommonResult.success(count);
         }
@@ -273,8 +273,8 @@ public class DmsBacteriaController {
     @ApiOperation("更新代谢产物与菌类的关系")
     @RequestMapping(value = "/productsRelations/update", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult updateRelationsStrainAndProducts(@RequestBody DmsBacteriaRelationsStrainProducts dmsBacteriaRelationsStrainProducts) {
-        int count = dmsBacteriaProductsService.updateRelationsStrainAndProducts(dmsBacteriaRelationsStrainProducts);
+    public CommonResult updateRelationsStrainAndProducts(@RequestBody DmsBacteriaRelationsProducts dmsBacteriaRelationsProducts) {
+        int count = dmsBacteriaProductsService.updateRelationsStrainAndProducts(dmsBacteriaRelationsProducts);
         if (count > 0) {
             return CommonResult.success(count);
         }
@@ -284,11 +284,59 @@ public class DmsBacteriaController {
     @ApiOperation("删除代谢产物与菌类的关系")
     @RequestMapping(value = "/productsRelations/delete", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult deleteRelationsStrainAndProducts(@RequestBody DmsBacteriaRelationsStrainProducts dmsBacteriaRelationsStrainProducts) {
-        int count = dmsBacteriaProductsService.deleteRelationsStrainAndProducts(dmsBacteriaRelationsStrainProducts);
+    public CommonResult deleteRelationsStrainAndProducts(@RequestBody DmsBacteriaRelationsProducts dmsBacteriaRelationsProducts) {
+        int count = dmsBacteriaProductsService.deleteRelationsStrainAndProducts(dmsBacteriaRelationsProducts);
         if (count > 0) {
             return CommonResult.success(count);
         }
         return CommonResult.failed();
     }
+
+
+
+    @ApiOperation("添加")
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult create(@RequestBody DmsBacteriaInfo dmsBacteriaInfo) {
+        int count = dmsBacteriaService.createBacteria(dmsBacteriaInfo);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("获取全部")
+    @RequestMapping(value = "/listAll", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CommonPage<DmsBacteriaInfo>> listAllKe(@RequestParam(value = "keyword", required = false) String keyword,
+                                                             @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                                             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                                                               @RequestParam(value = "bacteriaType", required = false) Integer bacteriaType ) {
+        List<DmsBacteriaInfo> dmsBacteriaList = dmsBacteriaService.listAllBacterias(keyword, pageSize, pageNum, bacteriaType);
+        return CommonResult.success(CommonPage.restPage(dmsBacteriaList));
+    }
+
+
+    @ApiOperation("编辑")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult update(@RequestBody DmsBacteriaInfo dmsBacteriaInfo) {
+        int count = dmsBacteriaService.updateBacteria(dmsBacteriaInfo);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("删除")
+    @RequestMapping(value = "/delete/{dmsBacteriaId}", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult delete(@PathVariable("dmsBacteriaId") int dmsBacteriaId) {
+        int count = dmsBacteriaService.deleteBacteriaById(dmsBacteriaId);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
 }

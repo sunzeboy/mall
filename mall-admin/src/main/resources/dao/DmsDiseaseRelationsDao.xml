@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.dao.DmsDiseaseRelationsDao">
+    <select id="findAll" resultType="com.macro.mall.dto.DmsDiseaseRelationsItem">
+        SELECT
+	s.id AS strain_id,
+	d.id AS disease_id,
+	s.strain_international_no AS strain_international_no,
+	d.disease_name_zh AS disease_name_zh
+FROM
+	dms_bacteria_strain s,
+	dms_disease_info d,
+	dms_disease_relations_strain r
+WHERE
+	s.id = r.strain_id
+	AND d.id = r.disease_id
+    </select>
+
+    <select id="findAllByKeyword" resultType="com.macro.mall.dto.DmsDiseaseRelationsItem">
+        SELECT
+	s.id AS strain_id,
+	d.id AS disease_id,
+	s.strain_international_no AS strain_international_no,
+	d.disease_name_zh AS disease_name_zh
+FROM
+	dms_bacteria_strain s,
+	dms_disease_info d,
+	dms_disease_relations_strain r
+WHERE
+	s.id = r.strain_id
+	AND d.id = r.disease_id
+	AND (d.disease_name_zh LIKE concat("%",#{keyword},"%")
+	OR s.strain_international_no LIKE concat("%",#{keyword},"%"))
+    </select>
+</mapper>

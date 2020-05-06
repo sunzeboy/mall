@@ -10,7 +10,7 @@ public interface DmsBacteriaRelationsStrainProductsMapper {
 
     int deleteByExample(DmsBacteriaRelationsStrainProductsExample example);
 
-    int deleteByPrimaryKey(@Param("strainId") Integer strainId, @Param("productsId") Integer productsId);
+    int deleteByPrimaryKey(@Param("bacteriaId") Integer bacteriaId, @Param("productsId") Integer productsId);
 
     int insert(DmsBacteriaRelationsStrainProducts record);
 
