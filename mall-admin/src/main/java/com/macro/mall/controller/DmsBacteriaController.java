@@ -2,6 +2,7 @@ package com.macro.mall.controller;
 
 import com.macro.mall.common.api.CommonPage;
 import com.macro.mall.common.api.CommonResult;
+import com.macro.mall.dto.DmsBacteriaRelationsComplicationDto;
 import com.macro.mall.dto.DmsProductsRelationsItem;
 import com.macro.mall.model.*;
 import com.macro.mall.service.DmsBacteriaProductsService;
@@ -339,4 +340,48 @@ public class DmsBacteriaController {
         return CommonResult.failed();
     }
 
+
+    @ApiOperation("添加")
+    @RequestMapping(value = "/relations/complication/create", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult createRelationsComplication(@RequestBody DmsBacteriaRelationsComplication dmsBacteriaRelationsComplication) {
+        int count = dmsBacteriaService.createBacteriaRelationsComplication(dmsBacteriaRelationsComplication);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("获取全部")
+    @RequestMapping(value = "/relations/complication/listAll", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CommonPage<DmsBacteriaRelationsComplicationDto>> listAllBacteriaRelationsComplications(@RequestParam(value = "keyword", required = false) String keyword,
+                                                                                   @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum ) {
+        List<DmsBacteriaRelationsComplicationDto> dmsBacteriaList = dmsBacteriaService.listAllBacteriaRelationsComplications(keyword, pageSize, pageNum);
+        return CommonResult.success(CommonPage.restPage(dmsBacteriaList));
+    }
+
+
+    @ApiOperation("编辑")
+    @RequestMapping(value = "/relations/complication/update", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateBacteriaRelationsComplication(@RequestBody DmsBacteriaRelationsComplication dmsBacteriaRelationsComplication) {
+        int count = dmsBacteriaService.updateBacteriaRelationsComplication(dmsBacteriaRelationsComplication);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("删除")
+    @RequestMapping(value = "/relations/complication/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult deleteBacteriaRelationsComplication(@RequestBody DmsBacteriaRelationsComplication dmsBacteriaRelationsComplication) {
+        int count = dmsBacteriaService.deleteBacteriaRelationsComplication(dmsBacteriaRelationsComplication);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.dao.DmsBacteriaRelationsComplicationDao">
+    <select id="findAll" resultType="com.macro.mall.dto.DmsBacteriaRelationsComplicationDto">
+     SELECT
+	b.id AS bacteriaId,
+	c.id AS complicationId,
+	b.bacteria_name_zh AS bacteriaNameZh,
+	c.complication_name_zh AS complicationNameZh
+FROM
+	dms_bacteria_info b,
+	dms_disease_complication c,
+	dms_bacteria_relations_complication r
+WHERE
+	b.id = r.bacteria_id
+	AND c.id = r.complication_id
+    </select>
+
+    <select id="findAllByKeyword" resultType="com.macro.mall.dto.DmsBacteriaRelationsComplicationDto">
+        SELECT
+	b.id AS bacteriaId,
+	c.id AS complicationId,
+	b.bacteria_name_zh AS bacteriaNameZh,
+	c.complication_name_zh AS complicationNameZh
+FROM
+	dms_bacteria_info b,
+	dms_disease_complication c,
+	dms_bacteria_relations_complication r
+WHERE
+	b.id = r.bacteria_id
+	AND c.id = r.complication_id
+	AND (b.bacteria_name_zh LIKE concat("%",#{keyword},"%")
+	OR c.complication_name_zh LIKE concat("%",#{keyword},"%"))
+    </select>
+</mapper>

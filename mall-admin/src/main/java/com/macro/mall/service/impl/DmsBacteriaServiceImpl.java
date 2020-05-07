@@ -1,6 +1,8 @@
 package com.macro.mall.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.macro.mall.dao.DmsBacteriaRelationsComplicationDao;
+import com.macro.mall.dto.DmsBacteriaRelationsComplicationDto;
 import com.macro.mall.mapper.*;
 import com.macro.mall.model.*;
 import com.macro.mall.service.DmsBacteriaService;
@@ -28,6 +30,12 @@ public class DmsBacteriaServiceImpl implements DmsBacteriaService {
 
     @Autowired
     private DmsBacteriaInfoMapper dmsBacteriaInfoMapper;
+
+    @Autowired
+    private DmsBacteriaRelationsComplicationMapper dmsBacteriaRelationsComplicationMapper;
+
+    @Autowired
+    private DmsBacteriaRelationsComplicationDao dmsBacteriaRelationsComplicationDao;
 
     @Override
     public int createKe(DmsBacteriaKe bacteriaKe) {
@@ -166,6 +174,31 @@ public class DmsBacteriaServiceImpl implements DmsBacteriaService {
     @Override
     public int deleteBacteriaById(int bacteriaInfoId) {
         return dmsBacteriaInfoMapper.deleteByPrimaryKey(bacteriaInfoId);
+    }
+
+    @Override
+    public int createBacteriaRelationsComplication(DmsBacteriaRelationsComplication dmsBacteriaRelationsComplication) {
+        return dmsBacteriaRelationsComplicationMapper.insert(dmsBacteriaRelationsComplication);
+    }
+
+    @Override
+    public List<DmsBacteriaRelationsComplicationDto> listAllBacteriaRelationsComplications(String keyword, Integer pageSize, Integer pageNum) {
+        PageHelper.startPage(pageNum, pageSize);
+        if (!StringUtils.isEmpty(keyword)) {
+            return dmsBacteriaRelationsComplicationDao.findAllByKeyword(keyword);
+        }
+        return dmsBacteriaRelationsComplicationDao.findAll();
+    }
+
+    @Override
+    public int updateBacteriaRelationsComplication(DmsBacteriaRelationsComplication dmsBacteriaRelationsComplication) {
+        DmsBacteriaRelationsComplicationExample example = new  DmsBacteriaRelationsComplicationExample();
+        return dmsBacteriaRelationsComplicationMapper.updateByExample(dmsBacteriaRelationsComplication,example);
+    }
+
+    @Override
+    public int deleteBacteriaRelationsComplication(DmsBacteriaRelationsComplication dmsBacteriaRelationsComplication) {
+        return dmsBacteriaRelationsComplicationMapper.deleteByPrimaryKey(dmsBacteriaRelationsComplication.getBacteriaId(),dmsBacteriaRelationsComplication.getComplicationId());
     }
 
 

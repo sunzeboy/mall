@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.mapper.DmsDiseaseRelationsBacteriaMapper">
+  <resultMap id="BaseResultMap" type="com.macro.mall.model.DmsDiseaseRelationsBacteria">
+    <id column="bacteria_id" jdbcType="INTEGER" property="bacteriaId" />
+    <id column="disease_id" jdbcType="INTEGER" property="diseaseId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    bacteria_id, disease_id
+  </sql>
+  <select id="selectByExample" parameterType="com.macro.mall.model.DmsDiseaseRelationsBacteriaExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dms_disease_relations_bacteria
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from dms_disease_relations_bacteria
+    where bacteria_id = #{bacteriaId,jdbcType=INTEGER}
+      and disease_id = #{diseaseId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.macro.mall.model.DmsDiseaseRelationsBacteriaExample">
+    delete from dms_disease_relations_bacteria
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.macro.mall.model.DmsDiseaseRelationsBacteria">
+    insert into dms_disease_relations_bacteria (bacteria_id, disease_id)
+    values (#{bacteriaId,jdbcType=INTEGER}, #{diseaseId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.macro.mall.model.DmsDiseaseRelationsBacteria">
+    insert into dms_disease_relations_bacteria
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bacteriaId != null">
+        bacteria_id,
+      </if>
+      <if test="diseaseId != null">
+        disease_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bacteriaId != null">
+        #{bacteriaId,jdbcType=INTEGER},
+      </if>
+      <if test="diseaseId != null">
+        #{diseaseId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.macro.mall.model.DmsDiseaseRelationsBacteriaExample" resultType="java.lang.Long">
+    select count(*) from dms_disease_relations_bacteria
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dms_disease_relations_bacteria
+    <set>
+      <if test="record.bacteriaId != null">
+        bacteria_id = #{record.bacteriaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.diseaseId != null">
+        disease_id = #{record.diseaseId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dms_disease_relations_bacteria
+    set bacteria_id = #{record.bacteriaId,jdbcType=INTEGER},
+      disease_id = #{record.diseaseId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

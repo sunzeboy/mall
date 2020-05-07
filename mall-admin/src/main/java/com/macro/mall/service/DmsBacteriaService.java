@@ -1,5 +1,6 @@
 package com.macro.mall.service;
 
+import com.macro.mall.dto.DmsBacteriaRelationsComplicationDto;
 import com.macro.mall.model.*;
 
 import java.util.List;
@@ -32,4 +33,9 @@ public interface DmsBacteriaService {
     List<DmsBacteriaInfo> listAllBacterias(String keyword, Integer pageSize, Integer pageNum, Integer bacteriaType);
     int updateBacteria(DmsBacteriaInfo bacteriaInfo);
     int deleteBacteriaById(int bacteriaInfoId);
+
+    int createBacteriaRelationsComplication(DmsBacteriaRelationsComplication dmsBacteriaRelationsComplication);
+    List<DmsBacteriaRelationsComplicationDto> listAllBacteriaRelationsComplications(String keyword, Integer pageSize, Integer pageNum);
+    int updateBacteriaRelationsComplication(DmsBacteriaRelationsComplication dmsBacteriaRelationsComplication);
+    int deleteBacteriaRelationsComplication(DmsBacteriaRelationsComplication dmsBacteriaRelationsComplication);
 }
