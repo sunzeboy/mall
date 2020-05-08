@@ -163,6 +163,7 @@ public class DmsBacteriaServiceImpl implements DmsBacteriaService {
             criteria.andBacteriaNameZhLike("%" + keyword + "%");
             example.or(example.createCriteria().andBacteriaNameLike("%" + keyword + "%"));
         }
+        example.setOrderByClause("bacteria_type ASC");
         return dmsBacteriaInfoMapper.selectByExample(example);
     }
 
