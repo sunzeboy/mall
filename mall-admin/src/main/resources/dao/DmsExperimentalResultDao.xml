@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macro.mall.dao.DmsExperimentalResultDao">
+    <select id="findAll" resultType="com.macro.mall.dto.DmsExperimentalResultDto">
+        SELECT
+	b.bacteria_name_zh AS bacteriaNameZh,
+	b.id AS bacteriaId,
+	d.id AS diseaseId,
+	d.disease_name_zh AS diseaseNameZh,
+	e.id AS resourceId,
+	e.resource_no AS resourceNo,
+	r.content_weight AS contentWeight,
+	r.test_time AS testTime,
+	r.id AS id
+FROM
+	dms_bacteria_info b,
+	dms_disease_info d,
+	dms_experimental_resource e,
+	dms_experimental_result r
+WHERE
+	b.id = r.bacteria_id
+	AND d.id = r.disease_id
+	AND e.id = r.resource_id
+    </select>
+
+    <select id="findAllByKeyword" resultType="com.macro.mall.dto.DmsExperimentalResultDto">
+        SELECT
+	b.bacteria_name_zh AS bacteriaNameZh,
+	b.id AS bacteriaId,
+	d.id AS diseaseId,
+	d.disease_name_zh AS diseaseNameZh,
+	e.id AS resourceId,
+	e.resource_no AS resourceNo,
+	r.content_weight AS contentWeight,
+	r.test_time AS testTime,
+	r.id AS id
+FROM
+	dms_bacteria_info b,
+	dms_disease_info d,
+	dms_experimental_resource e,
+	dms_experimental_result r
+WHERE
+	b.id = r.bacteria_id
+	AND d.id = r.disease_id
+	AND e.id = r.resource_id
+	AND (d.disease_name_zh LIKE concat("%",#{keyword},"%")
+	OR b.bacteria_name_zh LIKE concat("%",#{keyword},"%")
+	OR e.resource_no LIKE concat("%",#{keyword},"%"))
+    </select>
+</mapper>

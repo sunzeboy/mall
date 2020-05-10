@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.macro.mall.mapper.DmsComplicationTypeMapper">
   <resultMap id="BaseResultMap" type="com.macro.mall.model.DmsComplicationType">
-    <result column="complication_type" jdbcType="INTEGER" property="complicationType" />
+    <id column="complication_type" jdbcType="INTEGER" property="complicationType" />
     <result column="complication_desc" jdbcType="VARCHAR" property="complicationDesc" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -80,6 +80,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dms_complication_type
+    where complication_type = #{complicationType,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dms_complication_type
+    where complication_type = #{complicationType,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.macro.mall.model.DmsComplicationTypeExample">
     delete from dms_complication_type
     <if test="_parameter != null">
@@ -138,5 +148,19 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.DmsComplicationType">
+    update dms_complication_type
+    <set>
+      <if test="complicationDesc != null">
+        complication_desc = #{complicationDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where complication_type = #{complicationType,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.DmsComplicationType">
+    update dms_complication_type
+    set complication_desc = #{complicationDesc,jdbcType=VARCHAR}
+    where complication_type = #{complicationType,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -8,10 +8,7 @@ public class DmsExperimentalResult implements Serializable {
     private Integer id;
 
     @ApiModelProperty(value = "菌群ID")
-    private Integer probioticsId;
-
-    @ApiModelProperty(value = "1.phylum(门);2.class(纲);3.Genus(属);4.Species(种);5.Strain(菌株)")
-    private Integer probioticsType;
+    private Integer bacteriaId;
 
     @ApiModelProperty(value = "含量（mg/m）,每克含有多少毫克")
     private Float contentWeight;
@@ -25,6 +22,9 @@ public class DmsExperimentalResult implements Serializable {
     @ApiModelProperty(value = "测试时间")
     private Date testTime;
 
+    @ApiModelProperty(value = "疾病ID")
+    private Integer diseaseId;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -35,20 +35,12 @@ public class DmsExperimentalResult implements Serializable {
         this.id = id;
     }
 
-    public Integer getProbioticsId() {
-        return probioticsId;
+    public Integer getBacteriaId() {
+        return bacteriaId;
     }
 
-    public void setProbioticsId(Integer probioticsId) {
-        this.probioticsId = probioticsId;
-    }
-
-    public Integer getProbioticsType() {
-        return probioticsType;
-    }
-
-    public void setProbioticsType(Integer probioticsType) {
-        this.probioticsType = probioticsType;
+    public void setBacteriaId(Integer bacteriaId) {
+        this.bacteriaId = bacteriaId;
     }
 
     public Float getContentWeight() {
@@ -83,6 +75,14 @@ public class DmsExperimentalResult implements Serializable {
         this.testTime = testTime;
     }
 
+    public Integer getDiseaseId() {
+        return diseaseId;
+    }
+
+    public void setDiseaseId(Integer diseaseId) {
+        this.diseaseId = diseaseId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -90,12 +90,12 @@ public class DmsExperimentalResult implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", probioticsId=").append(probioticsId);
-        sb.append(", probioticsType=").append(probioticsType);
+        sb.append(", bacteriaId=").append(bacteriaId);
         sb.append(", contentWeight=").append(contentWeight);
         sb.append(", quantity=").append(quantity);
         sb.append(", resourceId=").append(resourceId);
         sb.append(", testTime=").append(testTime);
+        sb.append(", diseaseId=").append(diseaseId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

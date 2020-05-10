@@ -3,12 +3,12 @@
 <mapper namespace="com.macro.mall.mapper.DmsExperimentalResultMapper">
   <resultMap id="BaseResultMap" type="com.macro.mall.model.DmsExperimentalResult">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="probiotics_id" jdbcType="INTEGER" property="probioticsId" />
-    <result column="probiotics_type" jdbcType="INTEGER" property="probioticsType" />
+    <result column="bacteria_id" jdbcType="INTEGER" property="bacteriaId" />
     <result column="content_weight" jdbcType="REAL" property="contentWeight" />
     <result column="quantity" jdbcType="INTEGER" property="quantity" />
     <result column="resource_id" jdbcType="INTEGER" property="resourceId" />
     <result column="test_time" jdbcType="TIMESTAMP" property="testTime" />
+    <result column="disease_id" jdbcType="INTEGER" property="diseaseId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, probiotics_id, probiotics_type, content_weight, quantity, resource_id, test_time
+    id, bacteria_id, content_weight, quantity, resource_id, test_time, disease_id
   </sql>
   <select id="selectByExample" parameterType="com.macro.mall.model.DmsExperimentalResultExample" resultMap="BaseResultMap">
     select
@@ -105,11 +105,11 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into dms_experimental_result (probiotics_id, probiotics_type, content_weight, 
-      quantity, resource_id, test_time
+    insert into dms_experimental_result (bacteria_id, content_weight, quantity, 
+      resource_id, test_time, disease_id
       )
-    values (#{probioticsId,jdbcType=INTEGER}, #{probioticsType,jdbcType=INTEGER}, #{contentWeight,jdbcType=REAL}, 
-      #{quantity,jdbcType=INTEGER}, #{resourceId,jdbcType=INTEGER}, #{testTime,jdbcType=TIMESTAMP}
+    values (#{bacteriaId,jdbcType=INTEGER}, #{contentWeight,jdbcType=REAL}, #{quantity,jdbcType=INTEGER}, 
+      #{resourceId,jdbcType=INTEGER}, #{testTime,jdbcType=TIMESTAMP}, #{diseaseId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.macro.mall.model.DmsExperimentalResult">
@@ -118,11 +118,8 @@
     </selectKey>
     insert into dms_experimental_result
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="probioticsId != null">
-        probiotics_id,
-      </if>
-      <if test="probioticsType != null">
-        probiotics_type,
+      <if test="bacteriaId != null">
+        bacteria_id,
       </if>
       <if test="contentWeight != null">
         content_weight,
@@ -136,13 +133,13 @@
       <if test="testTime != null">
         test_time,
       </if>
+      <if test="diseaseId != null">
+        disease_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="probioticsId != null">
-        #{probioticsId,jdbcType=INTEGER},
-      </if>
-      <if test="probioticsType != null">
-        #{probioticsType,jdbcType=INTEGER},
+      <if test="bacteriaId != null">
+        #{bacteriaId,jdbcType=INTEGER},
       </if>
       <if test="contentWeight != null">
         #{contentWeight,jdbcType=REAL},
@@ -155,6 +152,9 @@
       </if>
       <if test="testTime != null">
         #{testTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="diseaseId != null">
+        #{diseaseId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -170,11 +170,8 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.probioticsId != null">
-        probiotics_id = #{record.probioticsId,jdbcType=INTEGER},
-      </if>
-      <if test="record.probioticsType != null">
-        probiotics_type = #{record.probioticsType,jdbcType=INTEGER},
+      <if test="record.bacteriaId != null">
+        bacteria_id = #{record.bacteriaId,jdbcType=INTEGER},
       </if>
       <if test="record.contentWeight != null">
         content_weight = #{record.contentWeight,jdbcType=REAL},
@@ -188,6 +185,9 @@
       <if test="record.testTime != null">
         test_time = #{record.testTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.diseaseId != null">
+        disease_id = #{record.diseaseId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -196,12 +196,12 @@
   <update id="updateByExample" parameterType="map">
     update dms_experimental_result
     set id = #{record.id,jdbcType=INTEGER},
-      probiotics_id = #{record.probioticsId,jdbcType=INTEGER},
-      probiotics_type = #{record.probioticsType,jdbcType=INTEGER},
+      bacteria_id = #{record.bacteriaId,jdbcType=INTEGER},
       content_weight = #{record.contentWeight,jdbcType=REAL},
       quantity = #{record.quantity,jdbcType=INTEGER},
       resource_id = #{record.resourceId,jdbcType=INTEGER},
-      test_time = #{record.testTime,jdbcType=TIMESTAMP}
+      test_time = #{record.testTime,jdbcType=TIMESTAMP},
+      disease_id = #{record.diseaseId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -209,11 +209,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.DmsExperimentalResult">
     update dms_experimental_result
     <set>
-      <if test="probioticsId != null">
-        probiotics_id = #{probioticsId,jdbcType=INTEGER},
-      </if>
-      <if test="probioticsType != null">
-        probiotics_type = #{probioticsType,jdbcType=INTEGER},
+      <if test="bacteriaId != null">
+        bacteria_id = #{bacteriaId,jdbcType=INTEGER},
       </if>
       <if test="contentWeight != null">
         content_weight = #{contentWeight,jdbcType=REAL},
@@ -227,17 +224,20 @@
       <if test="testTime != null">
         test_time = #{testTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="diseaseId != null">
+        disease_id = #{diseaseId,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.DmsExperimentalResult">
     update dms_experimental_result
-    set probiotics_id = #{probioticsId,jdbcType=INTEGER},
-      probiotics_type = #{probioticsType,jdbcType=INTEGER},
+    set bacteria_id = #{bacteriaId,jdbcType=INTEGER},
       content_weight = #{contentWeight,jdbcType=REAL},
       quantity = #{quantity,jdbcType=INTEGER},
       resource_id = #{resourceId,jdbcType=INTEGER},
-      test_time = #{testTime,jdbcType=TIMESTAMP}
+      test_time = #{testTime,jdbcType=TIMESTAMP},
+      disease_id = #{diseaseId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

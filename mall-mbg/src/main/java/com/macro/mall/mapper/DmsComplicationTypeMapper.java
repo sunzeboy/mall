@@ -10,13 +10,21 @@ public interface DmsComplicationTypeMapper {
 
     int deleteByExample(DmsComplicationTypeExample example);
 
+    int deleteByPrimaryKey(Integer complicationType);
+
     int insert(DmsComplicationType record);
 
     int insertSelective(DmsComplicationType record);
 
     List<DmsComplicationType> selectByExample(DmsComplicationTypeExample example);
 
+    DmsComplicationType selectByPrimaryKey(Integer complicationType);
+
     int updateByExampleSelective(@Param("record") DmsComplicationType record, @Param("example") DmsComplicationTypeExample example);
 
     int updateByExample(@Param("record") DmsComplicationType record, @Param("example") DmsComplicationTypeExample example);
+
+    int updateByPrimaryKeySelective(DmsComplicationType record);
+
+    int updateByPrimaryKey(DmsComplicationType record);
 }

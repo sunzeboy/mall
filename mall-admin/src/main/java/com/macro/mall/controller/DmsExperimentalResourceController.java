@@ -2,8 +2,10 @@ package com.macro.mall.controller;
 
 import com.macro.mall.common.api.CommonPage;
 import com.macro.mall.common.api.CommonResult;
+import com.macro.mall.dto.DmsExperimentalResultDto;
 import com.macro.mall.model.DmsDiseaseInfo;
 import com.macro.mall.model.DmsExperimentalResource;
+import com.macro.mall.model.DmsExperimentalResult;
 import com.macro.mall.service.DmsExperimentalResourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -63,6 +65,51 @@ public class DmsExperimentalResourceController {
     @ResponseBody
     public CommonResult deleteResource(@PathVariable("dmsExperimentalResourceId") int dmsExperimentalResourceId) {
         int count = dmsExperimentalResourceService.deleteExperimentalResourceById(dmsExperimentalResourceId);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+
+    @ApiOperation("添加测试数据")
+    @RequestMapping(value = "/result/create", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult createResult(@RequestBody DmsExperimentalResult dmsExperimentalResult) {
+        int count = dmsExperimentalResourceService.createExperimentalResult(dmsExperimentalResult);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("获取全部测试数据")
+    @RequestMapping(value = "/result/listAll", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<CommonPage<DmsExperimentalResultDto>> listAllResults(@RequestParam(value = "keyword", required = false) String keyword,
+                                                                              @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+                                                                              @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum ) {
+        List<DmsExperimentalResultDto> dmsBacteriaKeList = dmsExperimentalResourceService.listAllExperimentalResults(keyword, pageSize, pageNum);
+        return CommonResult.success(CommonPage.restPage(dmsBacteriaKeList));
+    }
+
+
+    @ApiOperation("编辑研测试数据")
+    @RequestMapping(value = "/result/update", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult updateResult(@RequestBody DmsExperimentalResult dmsExperimentalResult) {
+        int count = dmsExperimentalResourceService.updateExperimentalResult(dmsExperimentalResult);
+        if (count > 0) {
+            return CommonResult.success(count);
+        }
+        return CommonResult.failed();
+    }
+
+    @ApiOperation("删除测试数据")
+    @RequestMapping(value = "/result/delete/{dmsExperimentalResourceId}", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult deleteResult(@PathVariable("dmsExperimentalResultId") int dmsExperimentalResultId) {
+        int count = dmsExperimentalResourceService.deleteExperimentalResultById(dmsExperimentalResultId);
         if (count > 0) {
             return CommonResult.success(count);
         }

@@ -165,123 +165,63 @@ public class DmsExperimentalResultExample {
             return (Criteria) this;
         }
 
-        public Criteria andProbioticsIdIsNull() {
-            addCriterion("probiotics_id is null");
+        public Criteria andBacteriaIdIsNull() {
+            addCriterion("bacteria_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andProbioticsIdIsNotNull() {
-            addCriterion("probiotics_id is not null");
+        public Criteria andBacteriaIdIsNotNull() {
+            addCriterion("bacteria_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andProbioticsIdEqualTo(Integer value) {
-            addCriterion("probiotics_id =", value, "probioticsId");
+        public Criteria andBacteriaIdEqualTo(Integer value) {
+            addCriterion("bacteria_id =", value, "bacteriaId");
             return (Criteria) this;
         }
 
-        public Criteria andProbioticsIdNotEqualTo(Integer value) {
-            addCriterion("probiotics_id <>", value, "probioticsId");
+        public Criteria andBacteriaIdNotEqualTo(Integer value) {
+            addCriterion("bacteria_id <>", value, "bacteriaId");
             return (Criteria) this;
         }
 
-        public Criteria andProbioticsIdGreaterThan(Integer value) {
-            addCriterion("probiotics_id >", value, "probioticsId");
+        public Criteria andBacteriaIdGreaterThan(Integer value) {
+            addCriterion("bacteria_id >", value, "bacteriaId");
             return (Criteria) this;
         }
 
-        public Criteria andProbioticsIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("probiotics_id >=", value, "probioticsId");
+        public Criteria andBacteriaIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("bacteria_id >=", value, "bacteriaId");
             return (Criteria) this;
         }
 
-        public Criteria andProbioticsIdLessThan(Integer value) {
-            addCriterion("probiotics_id <", value, "probioticsId");
+        public Criteria andBacteriaIdLessThan(Integer value) {
+            addCriterion("bacteria_id <", value, "bacteriaId");
             return (Criteria) this;
         }
 
-        public Criteria andProbioticsIdLessThanOrEqualTo(Integer value) {
-            addCriterion("probiotics_id <=", value, "probioticsId");
+        public Criteria andBacteriaIdLessThanOrEqualTo(Integer value) {
+            addCriterion("bacteria_id <=", value, "bacteriaId");
             return (Criteria) this;
         }
 
-        public Criteria andProbioticsIdIn(List<Integer> values) {
-            addCriterion("probiotics_id in", values, "probioticsId");
+        public Criteria andBacteriaIdIn(List<Integer> values) {
+            addCriterion("bacteria_id in", values, "bacteriaId");
             return (Criteria) this;
         }
 
-        public Criteria andProbioticsIdNotIn(List<Integer> values) {
-            addCriterion("probiotics_id not in", values, "probioticsId");
+        public Criteria andBacteriaIdNotIn(List<Integer> values) {
+            addCriterion("bacteria_id not in", values, "bacteriaId");
             return (Criteria) this;
         }
 
-        public Criteria andProbioticsIdBetween(Integer value1, Integer value2) {
-            addCriterion("probiotics_id between", value1, value2, "probioticsId");
+        public Criteria andBacteriaIdBetween(Integer value1, Integer value2) {
+            addCriterion("bacteria_id between", value1, value2, "bacteriaId");
             return (Criteria) this;
         }
 
-        public Criteria andProbioticsIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("probiotics_id not between", value1, value2, "probioticsId");
-            return (Criteria) this;
-        }
-
-        public Criteria andProbioticsTypeIsNull() {
-            addCriterion("probiotics_type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProbioticsTypeIsNotNull() {
-            addCriterion("probiotics_type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andProbioticsTypeEqualTo(Integer value) {
-            addCriterion("probiotics_type =", value, "probioticsType");
-            return (Criteria) this;
-        }
-
-        public Criteria andProbioticsTypeNotEqualTo(Integer value) {
-            addCriterion("probiotics_type <>", value, "probioticsType");
-            return (Criteria) this;
-        }
-
-        public Criteria andProbioticsTypeGreaterThan(Integer value) {
-            addCriterion("probiotics_type >", value, "probioticsType");
-            return (Criteria) this;
-        }
-
-        public Criteria andProbioticsTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("probiotics_type >=", value, "probioticsType");
-            return (Criteria) this;
-        }
-
-        public Criteria andProbioticsTypeLessThan(Integer value) {
-            addCriterion("probiotics_type <", value, "probioticsType");
-            return (Criteria) this;
-        }
-
-        public Criteria andProbioticsTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("probiotics_type <=", value, "probioticsType");
-            return (Criteria) this;
-        }
-
-        public Criteria andProbioticsTypeIn(List<Integer> values) {
-            addCriterion("probiotics_type in", values, "probioticsType");
-            return (Criteria) this;
-        }
-
-        public Criteria andProbioticsTypeNotIn(List<Integer> values) {
-            addCriterion("probiotics_type not in", values, "probioticsType");
-            return (Criteria) this;
-        }
-
-        public Criteria andProbioticsTypeBetween(Integer value1, Integer value2) {
-            addCriterion("probiotics_type between", value1, value2, "probioticsType");
-            return (Criteria) this;
-        }
-
-        public Criteria andProbioticsTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("probiotics_type not between", value1, value2, "probioticsType");
+        public Criteria andBacteriaIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("bacteria_id not between", value1, value2, "bacteriaId");
             return (Criteria) this;
         }
 
@@ -522,6 +462,66 @@ public class DmsExperimentalResultExample {
 
         public Criteria andTestTimeNotBetween(Date value1, Date value2) {
             addCriterion("test_time not between", value1, value2, "testTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseIdIsNull() {
+            addCriterion("disease_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseIdIsNotNull() {
+            addCriterion("disease_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseIdEqualTo(Integer value) {
+            addCriterion("disease_id =", value, "diseaseId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseIdNotEqualTo(Integer value) {
+            addCriterion("disease_id <>", value, "diseaseId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseIdGreaterThan(Integer value) {
+            addCriterion("disease_id >", value, "diseaseId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("disease_id >=", value, "diseaseId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseIdLessThan(Integer value) {
+            addCriterion("disease_id <", value, "diseaseId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseIdLessThanOrEqualTo(Integer value) {
+            addCriterion("disease_id <=", value, "diseaseId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseIdIn(List<Integer> values) {
+            addCriterion("disease_id in", values, "diseaseId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseIdNotIn(List<Integer> values) {
+            addCriterion("disease_id not in", values, "diseaseId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseIdBetween(Integer value1, Integer value2) {
+            addCriterion("disease_id between", value1, value2, "diseaseId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("disease_id not between", value1, value2, "diseaseId");
             return (Criteria) this;
         }
     }
